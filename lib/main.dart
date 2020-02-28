@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
 
+import 'onboarding.dart';
+
 void main() => runApp(Dragonball());
 
 class Dragonball extends StatelessWidget {
@@ -21,7 +23,8 @@ class RunningIOS extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      home: TabIOS(),
+      home: OnboardingPagination(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -31,8 +34,9 @@ class RunningAndroid extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: null,
+        body: OnboardingPagination(),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
