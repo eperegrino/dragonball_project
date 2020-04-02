@@ -5,19 +5,39 @@ import 'package:dragonball_project/services/service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+class TabModel {
+  static String chars = "Characters";
+  static IconData charsIcon = CupertinoIcons.bookmark;
+  static String planets = "Planets";
+  static IconData planetsIcon = CupertinoIcons.bell;
+}
+
+class TabViewModel {
+  String chars = TabModel.chars;
+  IconData charsIcon = TabModel.charsIcon;
+  String planets = TabModel.planets;
+  IconData planetsIcon = TabModel.planetsIcon;
+}
+
 class TabIOS extends StatelessWidget {
+  TabViewModel tabViewModel;
+
+  TabIOS() {
+    tabViewModel = TabViewModel();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
           items: [
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.bookmark),
-              title: Text("Characters")
+              icon: Icon(tabViewModel.charsIcon),
+              title: Text(tabViewModel.chars)
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.bell),
-              title: Text("Planets")
+              icon: Icon(tabViewModel.planetsIcon),
+              title: Text(tabViewModel.planets)
             ),
           ]
         ),

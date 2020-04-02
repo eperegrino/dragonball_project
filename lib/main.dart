@@ -5,13 +5,29 @@ import 'dart:io' show Platform;
 
 import 'onboarding.dart';
 
-void main() => runApp(Dragonball());
+void main() => runApp(DragonBall());
 
-class Dragonball extends StatelessWidget {
+class DragonBallModel {
+  static bool isIOS = Platform.isIOS;
+}
+
+class DragonBallViewModel {
+  bool isIOS() {
+    return DragonBallModel.isIOS;
+  }
+}
+
+class DragonBall extends StatelessWidget {
+DragonBallViewModel dragonBallViewModel;
+
+DragonBall() {
+  dragonBallViewModel = DragonBallViewModel();
+}
+
   @override
   Widget build(BuildContext context) {
 
-    if(Platform.isIOS) { //iOS
+    if(dragonBallViewModel.isIOS()) { //iOS
       return RunningIOS();
     } else { //Android
       return RunningAndroid();

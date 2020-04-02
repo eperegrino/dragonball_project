@@ -3,40 +3,53 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingModel {
-  String onboardingImage;
+  String image;
   bool isVisible;
-  String onboardingText;
+  String text;
+  String btnText;
+}
+
+enum OnboardingScreens {
+  tela1,
+  tela2
 }
 
 class OnboardingViewModel {
+  OnboardingScreens tela;
   OnboardingModel onboardingModel;
 
-  OnboardingViewModel() {
+  OnboardingViewModel(this.tela) {
     onboardingModel = OnboardingModel();
-  }
-
-  void setImage(String image) {
-    onboardingModel.onboardingImage = image;
+    switch(this.tela) {
+      case OnboardingScreens.tela1:
+        onboardingModel.image = "images/dbz1.png";
+        onboardingModel.isVisible = false;
+        onboardingModel.text = "";
+        onboardingModel.btnText = "";
+        break;
+      case OnboardingScreens.tela2:
+        onboardingModel.image = "images/dbz.png";
+        onboardingModel.isVisible = true;
+        onboardingModel.text = "Oi, eu sou o Goku!";
+        onboardingModel.btnText = "Vamos começar!";
+        break;
+    }
   }
 
   String getImage() {
-    return onboardingModel.onboardingImage;
-  }
-
-  void setVisible(bool visible) {
-    onboardingModel.isVisible = visible;
+    return onboardingModel.image;
   }
 
   bool isVisible() {
     return onboardingModel.isVisible;
   }
 
-  void setText(String text) {
-    onboardingModel.onboardingText = text;
+  String getText() {
+    return onboardingModel.text;
   }
 
-  String getText() {
-    return onboardingModel.onboardingText;
+  String getBtnText() {
+    return onboardingModel.btnText;
   }
 }
 
@@ -45,14 +58,8 @@ class OnboardingPagination extends StatelessWidget {
   OnboardingViewModel onboardingViewModel2;
 
   OnboardingPagination() {
-    onboardingViewModel1 = OnboardingViewModel();
-    onboardingViewModel1.setImage("images/dbz1.png");
-    onboardingViewModel1.setVisible(false);
-    onboardingViewModel1.setText("");
-    onboardingViewModel2 = OnboardingViewModel();
-    onboardingViewModel2.setImage("images/dbz.png");
-    onboardingViewModel2.setVisible(true);
-    onboardingViewModel2.setText("Oi, eu sou o Goku!");
+    onboardingViewModel1 = OnboardingViewModel(OnboardingScreens.tela1);
+    onboardingViewModel2 = OnboardingViewModel(OnboardingScreens.tela2);
   }
 
   @override
@@ -98,7 +105,7 @@ class Onboarding extends StatelessWidget {
                     Visibility(
                       visible: onboardingViewModel.isVisible(),
                       child: CupertinoButton(
-                        child: Text("Vamos começar!"),
+                        child: Text(onboardingViewModel.getBtnText()),
                         color: Colors.deepOrange,
                         onPressed: () {
                           Navigator.push(
