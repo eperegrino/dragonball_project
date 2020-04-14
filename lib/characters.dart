@@ -16,13 +16,32 @@ class CharactersListPage extends StatefulWidget {
   _CharactersListPageState createState() => _CharactersListPageState();
 }
 
+class CharactersListPageModel{
+  static List<AllCharactersResponse> dataSource;
+}
+
+class CharactersListPageViewModel{
+  List<AllCharactersResponse> dataSource = CharactersListPageModel.dataSource;
+  Function carregarListagem;
+
+  CharactersListPageViewModel(this.carregarListagem){
+    dataSource = [];
+  }
+}
+
 class _CharactersListPageState extends State<CharactersListPage> {
-  List<AllCharactersResponse> dataSource = [];
+  CharactersListPageViewModel charactersListPageViewModel;
+
+  _CharactersListPageState(){
+    charactersListPageViewModel = CharactersListPageViewModel((){
+      _feedDataSource();
+    });
+  }
 
   @override
   initState() {
     super.initState();
-    _feedDataSource();
+    charactersListPageViewModel.carregarListagem();
   }
 
   @override
@@ -50,9 +69,9 @@ class _CharactersListPageState extends State<CharactersListPage> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: dataSource.isNotEmpty
+              child: charactersListPageViewModel.dataSource.isNotEmpty
                 ? ListView(
-                  children: dataSource.map((character) {
+                  children: charactersListPageViewModel.dataSource.map((character) {
                     return Container(
                       height: 50,
                       child: CharactersListPageCell(
@@ -89,7 +108,7 @@ class _CharactersListPageState extends State<CharactersListPage> {
         }
 
         setState(() {
-          dataSource = charList;
+          charactersListPageViewModel.dataSource = charList;
         });
       }
     });

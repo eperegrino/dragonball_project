@@ -1,17 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-class PlanetsGrid extends StatelessWidget {
-  List<String> dataSource = [];
-  List<String> namePlanet = ['Vegeta','Majin','Namek','Earth'];
+class PlanetsModel {
+  static List<String> dataSource;
+  static List<String> namePlanet;
+}
 
-  PlanetsGrid() {
-    List<String> namePlanet = ['Vegeta','Gohan','Goku','Piccolo','Cell','Goten','Krillin'];
+class PlanetsViewModel {
+  List<String> dataSource = PlanetsModel.dataSource;
+  List<String> namePlanet = PlanetsModel.namePlanet;
+
+  PlanetsViewModel(){
+    namePlanet = ['Vegeta','Gohan','Goku','Piccolo','Cell','Goten','Krillin'];
+    dataSource = [];
     for (var i = 0; i < 7; i++) {
       var nome = namePlanet.elementAt(i);
       dataSource.add("https://dragon-ball-api.herokuapp.com/images/$nome.jpg");
     }
-  } 
+  }
+
+}
+
+class PlanetsGrid extends StatelessWidget {
+  PlanetsViewModel planetsViewModel;
+
+  PlanetsGrid(){
+    planetsViewModel = PlanetsViewModel();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +45,7 @@ class PlanetsGrid extends StatelessWidget {
           crossAxisSpacing: 8,
           mainAxisSpacing: 8,
           padding: EdgeInsets.all(8),
-          children: dataSource.map((value) {
+          children: planetsViewModel.dataSource.map((value) {
             return Image.network(value);
           }).toList(),
         ),
