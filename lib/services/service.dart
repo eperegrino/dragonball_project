@@ -9,9 +9,9 @@ class BaseService {
 }
 
 abstract class Service {
-  Future<http.Response> getAllCharacters();
-  Future<http.Response> getAllPlanets();
-  Future<http.Response> getCharacterByName(String name);
+  Future<dynamic> getAllCharacters();
+  Future<dynamic> getAllPlanets();
+  Future<dynamic> getCharacterByName(String name);
   String getBaseUrl();
 }
 

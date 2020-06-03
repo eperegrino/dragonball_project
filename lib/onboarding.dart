@@ -64,7 +64,9 @@ class OnboardingPagination extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(children: <Widget>[
+    return PageView
+    ( key: Key("onboarding_page_view"),
+      children: <Widget>[
         Onboarding(onboardingViewModel1),
         Onboarding(onboardingViewModel2),
       ],
@@ -105,6 +107,7 @@ class Onboarding extends StatelessWidget {
                     Visibility(
                       visible: onboardingViewModel.isVisible(),
                       child: CupertinoButton(
+                        key: Key("onboarding_button"),
                         child: Text(onboardingViewModel.getBtnText()),
                         color: Colors.deepOrange,
                         onPressed: () {

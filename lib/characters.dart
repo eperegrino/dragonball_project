@@ -89,7 +89,8 @@ class _CharactersListPageState extends State<CharactersListPage> {
 
   _feedDataSource() {
     widget.service.getAllCharacters().then((response) {
-      var json = jsonDecode(response.body);
+      // var json = jsonDecode(response.body);
+      var json = response["body"];
       List<AllCharactersResponse> charList = [];
 
       if (json != null) {

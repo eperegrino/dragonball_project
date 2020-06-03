@@ -5,26 +5,80 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:dragonball_project/Planets.dart';
+import 'package:dragonball_project/characters.dart';
+import 'package:dragonball_project/onboarding.dart';
+import 'package:dragonball_project/services/mockedService.dart';
+import 'package:dragonball_project/tab.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:dragonball_project/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('initial smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(Dragonball());
+    var dragonball = DragonBall();
+    await tester.pumpWidget(dragonball);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text(''), findsOneWidget);
+    expect(find.text('Oi, eu sou o Goku!'), findsNothing);
+    expect(find.text('Vamos começar!'), findsNothing);
+    // expect(find.byWidget(DecorationImage(image: null)), findsOneWidget);
+    // expect(find.byWidget(CupertinoButton()), findsNothing);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    var element = find.byKey(Key("onboarding_page_view"));
+    await tester.drag(element, Offset(-500, 0));
+    await tester.pumpAndSettle();
+    
+    expect(find.text('Oi, eu sou o Goku!'), findsOneWidget);
+    expect(find.text(''), findsNothing);
+    expect(find.text('Vamos começar!'), findsOneWidget);
+    // expect(find.byWidget(DecorationImage()), findsOneWidget);
+    // expect(find.byWidget(CupertinoButton()), findsOneWidget);
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('Onboarding to list test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    var dragonball = DragonBall();
+    await tester.pumpWidget(dragonball);
+
+    var element = find.byKey(Key("onboarding_page_view"));
+    await tester.drag(element, Offset(-500, 0));
+    await tester.pumpAndSettle();
+
+    var button = find.byKey(Key("onboarding_button"));
+    await tester.tap(button);
+    // await tester.pumpWidget(dragonball);
+    // await tester.pumpAndSettle();
+
+    // expect(find.text("Characters"), findsWidgets);
+    // expect(find.text("Planets"), findsOneWidget);
+  });
+
+  testWidgets('tab view test', (WidgetTester tester) async {
+    var tabView = CupertinoApp(home: TabIOS());
+    await tester.pumpWidget(tabView);
+
+    expect(find.text("Characters"), findsWidgets);
+    expect(find.text("Planets"), findsOneWidget);
+  });
+
+  testWidgets('tab - list view test', (WidgetTester tester) async {
+    var listView = CupertinoApp(home: CharactersListPage(MockedServiceImpl()));
+    await tester.pumpWidget(listView);
+
+    await Future.delayed(Duration(seconds: 2)).then((value) {
+      expect(find.text("Goku"), findsOneWidget);
+      expect(find.text("bulba test"), findsWidgets);
+    });
+  });
+
+  testWidgets('tab - grid view test', (WidgetTester tester) async {
+    var gridView = CupertinoApp(home: PlanetsGrid());
+    await tester.pumpWidget(gridView);
+
+    expect(find.text("PLANETS"), findsOneWidget);
   });
 }
