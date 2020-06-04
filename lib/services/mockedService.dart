@@ -37,6 +37,6 @@ class MockedServiceImpl implements Service {
   @override
   String getBaseUrl() {
     // return baseUrl;
-    return "";
+    return "https://url_teste_dbz_api";
   }
 }

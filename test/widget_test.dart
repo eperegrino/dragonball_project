@@ -66,7 +66,20 @@ void main() {
   });
 
   testWidgets('tab - list view test', (WidgetTester tester) async {
-    var listView = CupertinoApp(home: CharactersListPage(MockedServiceImpl()));
+    var service = MockedServiceImpl();
+    // var count = 0;
+    // service.getAllCharacters().then((response) {
+    //   var list = response["body"];
+    //   for(var l in list) {
+    //     count++;
+    //   }
+    //   expect(count, 5);
+    // });
+
+    // await Future.delayed(Duration(seconds: 2)).then((value) {
+    //   expect(count, 5);
+    // });
+    var listView = CupertinoApp(home: CharactersListPage(service));
     await tester.pumpWidget(listView);
 
     await Future.delayed(Duration(seconds: 2)).then((value) {
