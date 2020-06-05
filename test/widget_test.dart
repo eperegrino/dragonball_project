@@ -57,41 +57,40 @@ void main() {
     // expect(find.text("Planets"), findsOneWidget);
   });
 
-  testWidgets('tab view test', (WidgetTester tester) async {
-    var tabView = CupertinoApp(home: TabIOS());
-    await tester.pumpWidget(tabView);
-
-    expect(find.text("Characters"), findsWidgets);
-    expect(find.text("Planets"), findsOneWidget);
-  });
-
-  testWidgets('tab - list view test', (WidgetTester tester) async {
-    var service = MockedServiceImpl();
-    // var count = 0;
-    // service.getAllCharacters().then((response) {
-    //   var list = response["body"];
-    //   for(var l in list) {
-    //     count++;
-    //   }
-    //   expect(count, 5);
-    // });
-
-    // await Future.delayed(Duration(seconds: 2)).then((value) {
-    //   expect(count, 5);
-    // });
-    var listView = CupertinoApp(home: CharactersListPage(service));
-    await tester.pumpWidget(listView);
-
-    await Future.delayed(Duration(seconds: 2)).then((value) {
-      expect(find.text("Goku"), findsOneWidget);
-      expect(find.text("bulba test"), findsWidgets);
+  group("group tab view test", () {
+    var tabView;
+    var service;
+    var listView;
+    var gridView;
+    setUpAll(() {
+      tabView = CupertinoApp(home: TabIOS());
+      service = MockedServiceImpl();
+      listView = CupertinoApp(home: CharactersListPage(service));
+      gridView = CupertinoApp(home: PlanetsGrid());
     });
-  });
 
-  testWidgets('tab - grid view test', (WidgetTester tester) async {
-    var gridView = CupertinoApp(home: PlanetsGrid());
-    await tester.pumpWidget(gridView);
+    testWidgets('tab view test', (WidgetTester tester) async {
+      await tester.pumpWidget(tabView);
+      await tester.pumpAndSettle();
 
-    expect(find.text("PLANETS"), findsOneWidget);
+      expect(find.text("Characters"), findsWidgets);
+      expect(find.text("Planets"), findsOneWidget);
+    });
+
+    testWidgets('tab - list view test', (WidgetTester tester) async {
+      await tester.pumpWidget(listView);
+      await tester.pumpAndSettle();
+
+      // // await Future.delayed(Duration(seconds: 2)).then((value) {
+        expect(find.text("Goku"), findsOneWidget);
+        expect(find.text("Saiyan"), findsWidgets);
+      // // });
+    });
+
+    testWidgets('tab - grid view test', (WidgetTester tester) async {
+      await tester.pumpWidget(gridView);
+
+      expect(find.text("PLANETS"), findsOneWidget);
+    });
   });
 }

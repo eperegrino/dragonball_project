@@ -7,11 +7,11 @@ class MockedServiceImpl implements Service {
   Future<dynamic> getAllCharacters() async {
     // return http.get(formUrl("character"));
     var list = [
-        {"name": "Vegeta", "species": "bulba test"},
-        {"name": "Goku", "species": "bulba test"},
-        {"name": "Gohan", "species": "bulba test"},
-        {"name": "Cell", "species": "bulba test"},
-        {"name": "Goten", "species": "bulba test"},
+        {"name": "Vegeta", "species": "Saiyan"},
+        {"name": "Goku", "species": "Saiyan"},
+        {"name": "Gohan", "species": "Saiyan"},
+        {"name": "Cell", "species": "Android"},
+        {"name": "Goten", "species": "Saiyan"},
       ];
       /*name = json['name'] ?? "",
         id = json['_id'] ?? 0,
