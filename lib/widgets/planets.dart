@@ -11,9 +11,9 @@ class PlanetsViewModel {
   List<String> namePlanet = PlanetsModel.namePlanet;
 
   PlanetsViewModel(){
-    namePlanet = ['Vegeta','Gohan','Goku','Piccolo','Cell','Goten','Krillin'];
+    namePlanet = ['Vegeta','Gohan','Goku','Piccolo','Cell','Goten','Krillin','Earth'];
     dataSource = [];
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < 8; i++) {
       var nome = namePlanet.elementAt(i);
       dataSource.add("https://dragon-ball-api.herokuapp.com/images/$nome.jpg");
     }

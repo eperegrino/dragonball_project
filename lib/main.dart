@@ -1,9 +1,9 @@
-import 'package:dragonball_project/tab.dart';
+import 'package:dragonball_project/widgets/tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
 
-import 'onboarding.dart';
+import './widgets/onboarding.dart';
 
 void main() => runApp(DragonBall());
 

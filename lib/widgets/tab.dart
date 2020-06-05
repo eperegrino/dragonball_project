@@ -1,9 +1,8 @@
-
-import 'package:dragonball_project/Planets.dart';
-import 'package:dragonball_project/characters.dart';
-import 'package:dragonball_project/services/service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import './planets.dart';
+import '../characters_coordinator.dart';
 
 class TabModel {
   static String chars = "Characters";
@@ -45,7 +44,7 @@ class TabIOS extends StatelessWidget {
           switch(index) {
             case 0:
               return CupertinoTabView(
-                builder: (BuildContext context) => CharactersListPage(ServiceImpl()),
+                builder: (BuildContext context) => CharactersCoordinator().widget(),
               );
             case 1: return CupertinoTabView(
               builder: (BuildContext context) => PlanetsGrid(),

@@ -1,12 +1,8 @@
 import 'package:http/http.dart' as http;
 
-class BaseService {
-  String baseUrl = "https://dragon-ball-api.herokuapp.com/api/";
+import 'dart:convert';
 
-  String formUrl(String endpoint) {
-    return "$baseUrl$endpoint";
-  }
-}
+import './base_service.dart';
 
 abstract class Service {
   Future<dynamic> getAllCharacters();
@@ -17,13 +13,24 @@ abstract class Service {
 
 class ServiceImpl extends BaseService implements Service {
   @override
-  Future<http.Response> getAllCharacters() {
-    return http.get(formUrl("character"));
+  Future<dynamic> getAllCharacters() async {
+    return await Future<dynamic>(() {
+      http.get(formUrl("character")).then((response){
+        var json = jsonDecode(response.body);
+        return json;
+      });
+    });
   }
 
   @override
-  Future<http.Response> getAllPlanets() {
-    return http.get(formUrl("planet"));
+  Future<dynamic> getAllPlanets() async {
+    return await Future<dynamic>(() {
+      http.get(formUrl("planet")).then((response) {
+        var json = jsonDecode(response.body);
+        return json;
+      });
+    });
+    
   }
 
   @override

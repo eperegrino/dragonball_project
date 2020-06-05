@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 import 'detail.dart';
-import 'models/character.dart';
-import 'services/service.dart';
+import '../models/character.dart';
+import '../services/service.dart';
 
 class CharactersListPageCell extends StatelessWidget {
   final AllCharactersResponse model;

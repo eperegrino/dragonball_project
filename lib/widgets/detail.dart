@@ -4,8 +4,8 @@ import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'models/character.dart';
-import 'services/service.dart';
+import '../models/character.dart';
+import '../services/service.dart';
 
 class Detail extends StatefulWidget {
   final AllCharactersResponse model;

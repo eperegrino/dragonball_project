@@ -5,11 +5,11 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:dragonball_project/Planets.dart';
-import 'package:dragonball_project/characters.dart';
-import 'package:dragonball_project/onboarding.dart';
+import 'package:dragonball_project/characters_view_model.dart';
+import 'package:dragonball_project/widgets/planets.dart';
+import 'package:dragonball_project/widgets/characters.dart';
 import 'package:dragonball_project/services/mockedService.dart';
-import 'package:dragonball_project/tab.dart';
+import 'package:dragonball_project/widgets/tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -60,12 +60,14 @@ void main() {
   group("group tab view test", () {
     var tabView;
     var service;
+    var viewModel;
     var listView;
     var gridView;
     setUpAll(() {
       tabView = CupertinoApp(home: TabIOS());
       service = MockedServiceImpl();
-      listView = CupertinoApp(home: CharactersListPage(service));
+      viewModel = CharactersListPageViewModel(service: service);
+      listView = CupertinoApp(home: CharactersListPage(viewModel: viewModel,));
       gridView = CupertinoApp(home: PlanetsGrid());
     });
 

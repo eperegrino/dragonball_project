@@ -1,6 +1,7 @@
-import 'package:dragonball_project/tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import './tab.dart';
 
 class OnboardingModel {
   String image;
