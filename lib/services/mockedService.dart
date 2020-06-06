@@ -1,3 +1,4 @@
+import 'package:dragonball_project/models/character.dart';
 import 'package:http/http.dart' as http;
 
 import './service.dart';
@@ -13,6 +14,7 @@ class MockedServiceImpl implements Service {
         {"name": "Cell", "species": "Android"},
         {"name": "Goten", "species": "Saiyan"},
       ];
+
       /*name = json['name'] ?? "",
         id = json['_id'] ?? 0,
         image = json['image'] ?? "",
@@ -20,8 +22,8 @@ class MockedServiceImpl implements Service {
         status = json['status'] ?? "",
         originPlanet = json['originPlanet'] ?? "";*/
 
-      Map<String, dynamic> json = {"body": list};
-      return json;
+      // Map<String, dynamic> json = {"body": list};
+      return list;
   }
 
   @override
